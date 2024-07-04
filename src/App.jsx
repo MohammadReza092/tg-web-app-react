@@ -28,9 +28,9 @@ const App = () => {
 
   useEffect(() => {
     if(!cuntry && !city){
-      app.MainButton.show();
-    }else{
       app.MainButton.hide();
+    }else{
+      app.MainButton.show();
     }
   },[])
 
@@ -50,6 +50,11 @@ const App = () => {
   },[onSendData])
 
 
+  const handleClick = () => {
+    setCity('');
+    setCuntry('');
+  }
+
   return (
     <>
      {/* <ul className='flex sticky top-0 bg-mdark-400 p-5 gap-3 flex-row-reverse'>
@@ -63,9 +68,9 @@ const App = () => {
             </li>
           ))}
         </ul> */}
-        <p>
-          { user?.username}
-        </p>
+        <button onClick={handleClick}>
+          click me for clear
+        </button>
       <ProductList/>
     </>
   );
