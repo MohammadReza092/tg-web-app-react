@@ -7,6 +7,7 @@ import { useTelegram } from './hooks/useTelegram';
 
 const App = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { user } = useTelegram();
   const headerList = [
     { id: 1, title: 'Home' },
     { id: 2, title: 'Products' },
@@ -29,6 +30,9 @@ const App = () => {
             </li>
           ))}
         </ul> */}
+        <p>
+          { user?.username}
+        </p>
       <ProductList/>
     </>
   );

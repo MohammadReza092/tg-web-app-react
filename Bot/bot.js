@@ -4,7 +4,7 @@ const bot = new TelegramBot(token , { polling : true});
 const startMessage = `
 سلام به ربات تلگرامی آکادمی روح بخش خوش آمدید
 در اینجا میتوانید خیلی راحت کلاس هارا خریداری کنید، و فایل کلاس هارا دریافت کنید، برای راهنمایی بیشتر میتوانید از گزینه راهنمایی کمک بگیرید`;
-const siteAddress = 'https://0dc9-2a01-4f8-1c1b-1214-00-1.ngrok-free.app';
+const siteAddress = 'https://arshop-bot.netlify.app/';
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
     if(msg.text == '/start'){
