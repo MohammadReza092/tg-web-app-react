@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import ProductCard from './components/Products/ProductItem';
 import { CartProvider } from './context/cartContext';
 import './App.css';
@@ -7,7 +7,9 @@ import { useTelegram } from './hooks/useTelegram';
 
 const App = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { user } = useTelegram();
+  const [ cuntry , setCuntry ] = useState('iran');
+  const [ city , setCity ] = useState('mashhad');
+  const { app , user } = useTelegram();
   const headerList = [
     { id: 1, title: 'Home' },
     { id: 2, title: 'Products' },
@@ -16,6 +18,37 @@ const App = () => {
   ];
 
   const handleCurrentIndex = (index) => setCurrentIndex(index);
+
+  
+  useEffect(() => {
+    app.MainButton.setParams({
+      text : 'VIEW ORDER',
+    });
+  },[])
+
+  useEffect(() => {
+    if(!cuntry && !city){
+      app.MainButton.show();
+    }else{
+      app.MainButton.hide();
+    }
+  },[])
+
+  const onSendData = useCallback(() => {
+    const data = {
+      cuntry,
+      city
+    }
+    app.sendData(JSON.stringify(data));
+  },[cuntry , city])
+
+  useEffect(() => {
+    app.onEvent('mainButtonClicked' , onSendData);
+    return () => {
+      app.offEvent('mainButtonClicked', onSendData);
+    }
+  },[onSendData])
+
 
   return (
     <>
